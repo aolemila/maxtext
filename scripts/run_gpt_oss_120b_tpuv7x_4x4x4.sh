@@ -72,7 +72,9 @@ XLA_FLAGS=" \
   --xla_xprof_register_llo_debug_info=true "
 
 # MaxText Workload Overrides
-# Note: use_tokamax_gmm=False 
+# Note: 
+# 1. use_tokamax_gmm=False 
+# 2. fsdp_shard_on_exp is not allowed in d30c749e036aefbbebb92954bb7345ec967d6b06 Tue Jun 30 19:56:11 2026 -0700, use shard_exp_on_fsdp
 MAXTEXT_ARGS="\
 model_name=gpt-oss-120b \
 per_device_batch_size=10.0 \
@@ -85,7 +87,7 @@ profile_periodically_period=10000 \
 async_checkpointing=False \
 enable_checkpointing=False \
 use_custom_sort_vjp=True \
-fsdp_shard_on_exp=True \
+shard_exp_on_fsdp=True \
 use_tokamax_gmm=${USE_TOKAMAX_GMM} \
 use_random_routing=True \
 remat_policy=custom \
@@ -133,7 +135,7 @@ run_name=${WORKLOAD_NAME}"
 #   --enable-debug-logs \
 #   --workload="${WORKLOAD_NAME}" \
 #   --command="set -e && export ENABLE_PATHWAYS_PERSISTENCE='1' && \
-# export LIBTPU_INIT_ARGS='${XLA_FLAGS}' && \
+# export LIBTPU_INIT_ARGS="${XLA_FLAGS}" && \
 # export JAX_PLATFORMS='tpu,cpu' && export ENABLE_PJRT_COMPATIBILITY='true' && \
 # python3 -m MaxText.train MaxText/configs/base.yml ${MAXTEXT_ARGS}"
 
