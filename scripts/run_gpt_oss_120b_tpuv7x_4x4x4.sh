@@ -145,4 +145,4 @@ run_name=${WORKLOAD_NAME}"
 
 export LIBTPU_INIT_ARGS='${XLA_FLAGS}' && \
 export ENABLE_PJRT_COMPATIBILITY='true' && \
-python3 -m MaxText.train MaxText/configs/base.yml ${MAXTEXT_ARGS}"
+python3 -m MaxText.train MaxText/configs/base.yml ${MAXTEXT_ARGS}
