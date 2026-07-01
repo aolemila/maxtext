@@ -37,6 +37,11 @@ fi
 echo "BASE_OUTPUT_DIR=$BASE_OUTPUT_DIR"
 export WORKLOAD_IMAGE=""
 export WORKLOAD_NAME="gpt-oss-120b-$(date +%Y%m%d-%H%M)"
+if [[ "${USE_TOKAMAX_GMM:-false}" == "true" ]]; then
+  export USE_TOKAMAX_GMM="True"
+else
+  export USE_TOKAMAX_GMM="False"
+fi
 
 # XLA Flags
 XLA_FLAGS=" \
@@ -85,7 +90,7 @@ async_checkpointing=False \
 enable_checkpointing=False \
 use_custom_sort_vjp=True \
 fsdp_shard_on_exp=True \
-use_tokamax_gmm=False \
+use_tokamax_gmm=${USE_TOKAMAX_GMM} \
 use_random_routing=True \
 remat_policy=custom \
 decoder_layer_input=offload \
