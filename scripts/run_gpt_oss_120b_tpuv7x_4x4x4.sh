@@ -139,7 +139,7 @@ run_name=${WORKLOAD_NAME}"
 # export JAX_PLATFORMS='tpu,cpu' && export ENABLE_PJRT_COMPATIBILITY='true' && \
 # python3 -m MaxText.train MaxText/configs/base.yml ${MAXTEXT_ARGS}"
 
-export LIBTPU_INIT_ARGS='${XLA_FLAGS}' && \
+export LIBTPU_INIT_ARGS="${XLA_FLAGS}" && \
 export ENABLE_PJRT_COMPATIBILITY='true' && \
 #python3 -m MaxText.train MaxText/configs/base.yml ${MAXTEXT_ARGS}
 python3 -m maxtext.trainers.pre_train.train src/maxtext/configs/base.yml ${MAXTEXT_ARGS}
