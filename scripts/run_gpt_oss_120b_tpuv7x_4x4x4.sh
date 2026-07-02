@@ -68,8 +68,9 @@ XLA_FLAGS=" \
   --xla_tpu_enable_sparse_core_collective_offload_nd_reduce_scatter=true \
   --xla_tpu_pcie_bandwidth_multiplier=0.03 \
   --xla_tpu_enable_multi_compute_overlap_in_layer_scheduler=true \
-  --xla_enable_custom_call_region_trace=true \
   --xla_xprof_register_llo_debug_info=true "
+#  --xla_enable_custom_call_region_trace=true
+
 
 # MaxText Workload Overrides
 # Note: 
