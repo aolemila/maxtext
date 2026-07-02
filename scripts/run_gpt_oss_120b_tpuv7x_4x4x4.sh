@@ -75,13 +75,14 @@ XLA_FLAGS=" \
 # Note: 
 # 1. use_tokamax_gmm=False 
 # 2. fsdp_shard_on_exp is not allowed in d30c749e036aefbbebb92954bb7345ec967d6b06 Tue Jun 30 19:56:11 2026 -0700, use shard_exp_on_fsdp
+# per_device_batch_size=10 & max_target_length=8192 & weight_dtype=float32
 MAXTEXT_ARGS="\
 model_name=gpt-oss-120b \
-per_device_batch_size=10.0 \
-max_target_length=8192 \
+per_device_batch_size=2.0 \
+max_target_length=4096 \
 skip_jax_distributed_system=True \
 dtype=bfloat16 \
-weight_dtype=float32 \
+weight_dtype=bfloat16 \
 skip_first_n_steps_for_profiler=5 \
 profile_periodically_period=10000 \
 async_checkpointing=False \
