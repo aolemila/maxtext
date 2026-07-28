@@ -68,8 +68,9 @@ XLA_FLAGS=" \
   --xla_tpu_enable_sparse_core_collective_offload_nd_reduce_scatter=true \
   --xla_tpu_pcie_bandwidth_multiplier=0.03 \
   --xla_tpu_enable_multi_compute_overlap_in_layer_scheduler=true \
-  --xla_xprof_register_llo_debug_info=true "
-#  --xla_enable_custom_call_region_trace=true
+  --xla_xprof_register_llo_debug_info=true \
+  --xla_enable_custom_call_region_trace=true \
+  --xla_dump_to=gs://tpu-for-training-falcon-logs/tmp/google_support_reproduce/hang_with_custom_call_region_trace/hlo_dump --xla_dump_hlo_as_text"
 
 
 # MaxText Workload Overrides
