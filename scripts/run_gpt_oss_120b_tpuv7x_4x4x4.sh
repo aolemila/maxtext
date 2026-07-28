@@ -37,8 +37,8 @@ else
   export USE_TOKAMAX_GMM="False"
 fi
 
-# XLA Flags
-XLA_FLAGS=" \
+# libtpu init flags
+LIBTPU_FLAGS=" \
   --xla_tpu_scoped_vmem_limit_kib=65536 \
   --xla_tpu_impure_enable_packed_bf16_math_ops=true \
   --xla_tpu_enable_sparse_core_reduce_scatter_v2=true \
@@ -69,8 +69,10 @@ XLA_FLAGS=" \
   --xla_tpu_pcie_bandwidth_multiplier=0.03 \
   --xla_tpu_enable_multi_compute_overlap_in_layer_scheduler=true \
   --xla_xprof_register_llo_debug_info=true \
-  --xla_enable_custom_call_region_trace=true \
-  --xla_dump_to=gs://tpu-for-training-falcon-logs/tmp/google_support_reproduce/hang_with_custom_call_region_trace/hlo_dump --xla_dump_hlo_as_text"
+  --xla_enable_custom_call_region_trace=true"
+
+# XLA dump flags. Keep these out of LIBTPU_INIT_ARGS; libtpu rejects them.
+XLA_FLAGS="--xla_dump_to=gs://tpu-for-training-falcon-logs/tmp/google_support_reproduce/hang_with_custom_call_region_trace/hlo_dump --xla_dump_hlo_as_text"
 
 
 # MaxText Workload Overrides
@@ -142,7 +144,8 @@ run_name=${WORKLOAD_NAME}"
 # export JAX_PLATFORMS='tpu,cpu' && export ENABLE_PJRT_COMPATIBILITY='true' && \
 # python3 -m MaxText.train MaxText/configs/base.yml ${MAXTEXT_ARGS}"
 
-export LIBTPU_INIT_ARGS="${XLA_FLAGS}" && \
+export LIBTPU_INIT_ARGS="${LIBTPU_FLAGS}" && \
+export XLA_FLAGS="${XLA_FLAGS}" && \
 export ENABLE_PJRT_COMPATIBILITY='true' && \
 #python3 -m MaxText.train MaxText/configs/base.yml ${MAXTEXT_ARGS}
 python3 -m maxtext.trainers.pre_train.train src/maxtext/configs/base.yml ${MAXTEXT_ARGS}
