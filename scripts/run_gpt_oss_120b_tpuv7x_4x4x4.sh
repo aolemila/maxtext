@@ -72,7 +72,7 @@ LIBTPU_FLAGS=" \
   --xla_enable_custom_call_region_trace=true"
 
 # XLA dump flags. Keep these out of LIBTPU_INIT_ARGS; libtpu rejects them.
-XLA_FLAGS="--xla_dump_to=/tmp/tpu_logs/google_support_reproduce/hang_with_custom_call_region_trace/hlo_dump --xla_dump_hlo_as_text"
+XLA_FLAGS="--xla_dump_to=/gcs/google_support_reproduce/hang_with_custom_call_region_trace/hlo_dump --xla_dump_hlo_as_text"
 
 
 # MaxText Workload Overrides
