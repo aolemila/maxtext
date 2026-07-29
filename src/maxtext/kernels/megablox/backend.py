@@ -445,13 +445,13 @@ def gmm(
         dot_general_dims = (((1,), (1,)), ((), ()))
       else:
         dot_general_dims = (((1,), (0,)), ((), ()))
-
-      acc_scratch[...] += qpl.dot_general(
-          loaded_lhs,
-          loaded_rhs,
-          preferred_element_type=jnp.float32,
-          dimension_numbers=dot_general_dims,
-      )
+      with jax.named_scope("dot_general"):
+        acc_scratch[...] += qpl.dot_general(
+            loaded_lhs,
+            loaded_rhs,
+            preferred_element_type=jnp.float32,
+            dimension_numbers=dot_general_dims,
+        )
       if is_last_k_tile:
         _store_accum()
 
